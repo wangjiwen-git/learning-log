@@ -1,0 +1,10 @@
+# 每条路由都描述了Platform.sh该如何处理到来的请求
+
+
+"htpps://{default}/":
+    type: upstream
+    upstream: "ll_project:http"
+
+"htpps://www.{default}/":
+  type: redirect
+  to: "https://{default}/"
