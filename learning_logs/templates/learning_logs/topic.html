@@ -1,15 +1,27 @@
 {% extends 'learning_logs/base.html' %}
 
-{% block content %} 
-    <p> Topic: {{ topic.text }}</p>
+{%block page_header %}
+ <h2>{{topic.text}}</h2>
+ {% endblock page_header%}
 
-    <p> Entries: </p>
-    <ul>
-        {% for entry in entries %}
-            <p>{{ entry.data_added|date:'M d, Y H:i'}}</p>
-            <p>{{ entry.text|linebreaks }}</p>
-        {% empty %}
-            <li>No entries have been added yet.</li>
-        {% endfor %}
-    </ul>
+{% block content %} 
+    
+    <p>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry </a>
+    </p>
+    {% for entry in entries %}
+        <div class="card mb-3">
+            <!--包含时间戳和编辑链接的标题-->
+            <h5 class="card-header ">
+                {{entry.date_added|date:"M d, Y H:i" }}
+                <small>
+                    <a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>
+                </small>
+            </h5>
+            <!--包含条目文本的卡片主体-->
+            <div class="card-body">{{ entry.text|linebreaks }}</p></div>
+        </div>
+    {% empty %}
+        <p>There are no entries have been added yet.</p>
+    {% endfor %}
 {% endblock content %}

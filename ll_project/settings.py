@@ -33,6 +33,10 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 我的应用程序
     "learning_logs",
+    'accounts',
+
+    # 第三方应用程序
+    "django_bootstrap5",
 
     # django默认添加的应用程序
     "django.contrib.admin",
@@ -150,3 +154,8 @@ if config.is_valid_platform():
                 'PORT': db_settings['port'],
             }
         }
+
+# 我的设置
+LOGIN_REDIRECT_URL = 'learning_logs:index'
+LOGOUT_REDIRECT_URL = 'learning_logs:index'
+LOGIN_URL = 'accounts:login'
